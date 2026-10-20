@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-body: "Nunito", ui-rounded, system-ui, sans-serif;
+  --color-cream: #FFF9F1;
+  --color-parchment: #FFF3E4;
+  --color-ink: #2E2A3B;
+  --color-ink-soft: #5B5570;
+  --color-coral: #FF6B5B;
+  --color-coral-deep: #E14E40;
+  --color-tealpop: #0EA58C;
+  --color-teal-deep: #0B7C69;
+  --color-sunshine: #FFC93C;
+  --color-sunshine-deep: #E0A81A;
+  --color-grape: #7C6FF0;
+  --color-grape-deep: #5B4ED6;
+  --color-sky-pop: #3EA6FF;
+  --color-blush: #FFE3DC;
+  --color-mint: #D7F3E5;
+  --color-butter: #FFF0C4;
+  --color-lilac: #E4E0FF;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: var(--font-display); }
+
+.dot-grid {
+  background-image: radial-gradient(rgba(46,42,59,0.10) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.dot-grid-light {
+  background-image: radial-gradient(rgba(255,255,255,0.22) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+.squiggle-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cpath d='M2 8 Q 12 2, 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8' fill='none' stroke='%23FFC93C' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.35em;
+  padding-bottom: 0.12em;
+}
+
+.confetti-card { position: relative; overflow: hidden; }
+.confetti-card::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255,255,255,0.35) 0 6px, transparent 7px),
+    radial-gradient(circle at 88% 12%, rgba(255,255,255,0.3) 0 4px, transparent 5px),
+    radial-gradient(circle at 78% 82%, rgba(255,255,255,0.28) 0 7px, transparent 8px),
+    radial-gradient(circle at 8% 85%, rgba(255,255,255,0.25) 0 5px, transparent 6px);
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media print {
+  .print-hidden { display: none !important; }
+  .print-full { position: static !important; max-width: none !important; box-shadow: none !important; }
+  body { background: white; }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--float-rot, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--float-rot, 0deg)); }
+}
+.animate-floaty { animation: floaty 5s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop-in { animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
