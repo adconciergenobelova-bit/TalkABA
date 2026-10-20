@@ -30,7 +30,7 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
   const { addToCart, isEnrolled, wishlist, toggleWishlist } = useStore();
   const inst = instructorOf(course.instructorId);
   const enrolled = isEnrolled(course.id);
-  const wished = wishlist.includes(course.id);
+  const wished = Boolean(wishlist?.includes(course.id));
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}

@@ -46,7 +46,9 @@ const Ctx = createContext<Store | null>(null);
 function load<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return parsed != null ? (parsed as T) : fallback;
   } catch {
     return fallback;
   }
@@ -58,9 +60,18 @@ function uid(prefix: string) {
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => load("taa_user", null));
-  const [cart, setCart] = useState<string[]>(() => load("taa_cart", []));
-  const [enrollments, setEnrollments] = useState<Record<string, Enrollment>>(() => load("taa_enroll", {}));
-  const [wishlist, setWishlist] = useState<string[]>(() => load("taa_wish", []));
+  const [cart, setCart] = useState<string[]>(() => {
+    const v = load<string[]>("taa_cart", []);
+    return Array.isArray(v) ? v : [];
+  });
+  const [enrollments, setEnrollments] = useState<Record<string, Enrollment>>(() => {
+    const v = load<Record<string, Enrollment>>("taa_enroll", {});
+    return v && typeof v === "object" && !Array.isArray(v) ? v : {};
+  });
+  const [wishlist, setWishlist] = useState<string[]>(() => {
+    const v = load<string[]>("taa_wish", []);
+    return Array.isArray(v) ? v : [];
+  });
   const [cartOpen, setCartOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
 
@@ -73,15 +84,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(() => setUser(null), []);
 
   const addToCart = useCallback((id: string) => {
-    setCart((c) => (c.includes(id) ? c : [...c, id]));
+    setCart((c) => {
+      const safe = Array.isArray(c) ? c : [];
+      return safe.includes(id) ? safe : [...safe, id];
+    });
     setCartOpen(true);
   }, []);
-  const removeFromCart = useCallback((id: string) => setCart((c) => c.filter((x) => x !== id)), []);
+  const removeFromCart = useCallback((id: string) => {
+    setCart((c) => (Array.isArray(c) ? c.filter((x) => x !== id) : []));
+  }, []);
   const clearCart = useCallback(() => setCart([]), []);
 
   const enroll = useCallback((ids: string[]) => {
     setEnrollments((prev) => {
-      const next = { ...prev };
+      const next = { ...(prev || {}) };
       for (const id of ids) {
         if (!next[id]) {
           next[id] = { courseId: id, enrolledAt: new Date().toISOString(), progress: {}, quizBest: null, quizPassed: false, certId: null };
@@ -91,37 +107,42 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const isEnrolled = useCallback((id: string) => Boolean(enrollments[id]), [enrollments]);
+  const isEnrolled = useCallback((id: string) => Boolean(enrollments?.[id]), [enrollments]);
 
   const toggleLesson = useCallback((courseId: string, lessonId: string) => {
     setEnrollments((prev) => {
-      const e = prev[courseId];
+      const safe = prev || {};
+      const e = safe[courseId];
       if (!e) return prev;
-      const progress = { ...e.progress, [lessonId]: !e.progress[lessonId] };
-      return { ...prev, [courseId]: { ...e, progress } };
+      const progress = { ...(e.progress || {}), [lessonId]: !e.progress?.[lessonId] };
+      return { ...safe, [courseId]: { ...e, progress } };
     });
   }, []);
 
   const recordQuiz = useCallback((courseId: string, score: number, nameOnCert: string) => {
     let cert: string | null = null;
     setEnrollments((prev) => {
-      const e = prev[courseId];
+      const safe = prev || {};
+      const e = safe[courseId];
       if (!e) return prev;
       const passed = score >= 80;
       const best = e.quizBest == null ? score : Math.max(e.quizBest, score);
       cert = passed ? e.certId ?? uid("TAA") : e.certId;
-      return { ...prev, [courseId]: { ...e, quizBest: Math.round(best), quizPassed: e.quizPassed || passed, certId: cert, nameOnCert } };
+      return { ...safe, [courseId]: { ...e, quizBest: Math.round(best), quizPassed: e.quizPassed || passed, certId: cert, nameOnCert } };
     });
     return cert;
   }, []);
 
   const toggleWishlist = useCallback((id: string) => {
-    setWishlist((w) => (w.includes(id) ? w.filter((x) => x !== id) : [...w, id]));
+    setWishlist((w) => {
+      const safe = Array.isArray(w) ? w : [];
+      return safe.includes(id) ? safe.filter((x) => x !== id) : [...safe, id];
+    });
   }, []);
 
   const totalCeus = useMemo(() => {
-    return Object.values(enrollments).reduce((sum, e) => {
-      if (!e.quizPassed) return sum;
+    return Object.values(enrollments || {}).reduce((sum, e) => {
+      if (!e?.quizPassed) return sum;
       const c = courses.find((x) => x.id === e.courseId);
       return sum + (c?.ceus ?? 0);
     }, 0);
@@ -147,6 +168,6 @@ export function courseProgress(courseId: string, e?: Enrollment): number {
   if (!c) return 0;
   const lessonIds = c.modules.flatMap((m) => m.lessons.map((l) => l.id));
   if (!e || lessonIds.length === 0) return 0;
-  const done = lessonIds.filter((id) => e.progress[id]).length;
+  const done = lessonIds.filter((id) => e.progress?.[id]).length;
   return Math.round((done / lessonIds.length) * 100);
 }

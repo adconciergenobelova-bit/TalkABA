@@ -45,7 +45,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <button onClick={() => setCartOpen(true)} className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#2E2A3B]/6 text-[#2E2A3B] transition hover:bg-[#2E2A3B] hover:text-white" aria-label="Open cart">
             <ShoppingCart size={19} />
-            {cart.length > 0 && <span className="absolute -right-1 -top-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#FF6B5B] text-[11px] font-black text-white ring-2 ring-[#FFF9F1]">{cart.length}</span>}
+            {(cart?.length ?? 0) > 0 && <span className="absolute -right-1 -top-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#FF6B5B] text-[11px] font-black text-white ring-2 ring-[#FFF9F1]">{cart.length}</span>}
           </button>
           {user ? (
             <div className="relative">
@@ -157,7 +157,7 @@ export function NewsletterForm() {
 export function CartDrawer() {
   const { cartOpen, setCartOpen, cart, removeFromCart, user, setAuthOpen, enroll, clearCart } = useStore();
   const nav = useNavigate();
-  const items = cart.map((id) => courses.find((c) => c.id === id)!).filter(Boolean);
+  const items = (cart || []).map((id) => courses.find((c) => c.id === id)!).filter(Boolean);
   const total = items.reduce((s, c) => s + c.price, 0);
   const savings = items.reduce((s, c) => s + (c.compareAt ? c.compareAt - c.price : 0), 0);
   const ceus = items.reduce((s, c) => s + c.ceus, 0);
