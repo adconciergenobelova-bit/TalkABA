@@ -35,64 +35,113 @@ const assurances = [
 
 function Hero() {
   return (
-    <div className="relative overflow-hidden bg-[#FFF9F1]">
-      <div className="dot-grid absolute inset-0 opacity-70" />
-      <div className="absolute -left-20 top-24 h-56 w-56 rounded-full bg-[#FFC93C]/25 blur-2xl" />
-      <div className="absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-[#FF6B5B]/15 blur-2xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-2 lg:pb-24 lg:pt-20 lg:px-8">
+    <div className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, #0B4A8E 0%, #0B4A8EDD 55%, #0B4A8EB3 100%)` }}>
+      <div className="dot-grid-light absolute inset-0 opacity-60" />
+      <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10" />
+      <div className="absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-black/10" />
+      <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-8" style={{ color: "#FFF9F1" }}>
         <div>
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 rounded-full border-2 border-[#0EA58C]/25 bg-[#D7F3E5] px-4 py-1.5 text-xs font-black text-[#0B7C69]">
-            <span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0EA58C] opacity-60" /><span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#0EA58C]" /></span>
-            BACB ACE PROVIDER · ASHA APPROVED · 32.5 CEUs LIVE
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="font-display mt-5 text-5xl font-semibold leading-[1.02] text-[#2E2A3B] sm:text-6xl lg:text-7xl">
-            CEUs that feel like <span className="squiggle-underline text-[#E14E40]">playtime</span>, not paperwork.
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-5 max-w-lg text-lg font-medium leading-relaxed text-[#5B5570]">
-            Today's ABA, PFA & SBT continuing education for BCBAs, RBTs & SLPs — taught the way we practice: joy-first, assent-based, and trauma-informed. Certificates in minutes, skills for a career.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-7 flex flex-wrap items-center gap-3">
-            <Link to="/courses" className="inline-flex items-center gap-2 rounded-full bg-[#FF6B5B] px-7 py-4 text-base font-black text-white shadow-[0_6px_0_#E14E40] transition hover:brightness-105 active:translate-y-1 active:shadow-none">Browse CEU courses <ArrowRight size={18} strokeWidth={3} /></Link>
-            <Link to="/philosophy" className="inline-flex items-center gap-2 rounded-full border-[3px] border-[#2E2A3B] bg-white px-7 py-[13px] text-base font-black text-[#2E2A3B] transition hover:bg-[#2E2A3B] hover:text-white">Our philosophy</Link>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="mt-7 flex flex-wrap items-center gap-4">
-            <div className="flex -space-x-3">
-              {instructors.map((i) => (
-                <span key={i.id} className="inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#FFF9F1] font-display text-sm font-semibold text-white" style={{ background: i.color }}>{i.initials}</span>
-              ))}
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#FFF9F1] bg-[#2E2A3B] text-[10px] font-black text-white">24k+</span>
-            </div>
-            <div><Stars rating={5} size={15} /><p className="mt-0.5 text-xs font-extrabold text-[#5B5570]">Loved by 24,000+ BCBAs, RBTs & SLPs</p></div>
+          <motion.span initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-block rounded-full bg-white/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.16em] text-white backdrop-blur">LEARN</motion.span>
+          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl">CONNECT</motion.h1>
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-4 max-w-xl text-lg font-medium text-white/90">GROW</motion.p>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-6 flex flex-wrap gap-3" style={{ color: "#FFF9F1" }}>
+            <span>MAKE A</span>
+            <span>BIGGER IMPACT</span>
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15, duration: 0.6 }} className="relative">
-          <div className="absolute -inset-4 rotate-2 rounded-[2.5rem] bg-[#FFC93C]/40" />
-          <img src="/images/hero-play.jpg" alt="Child joyfully playing during therapy" className="relative h-[420px] w-full -rotate-1 rounded-[2.5rem] border-4 border-white object-cover shadow-2xl sm:h-[500px]" />
-          <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="absolute -left-3 top-8 -rotate-6 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-8">
-            <p className="flex items-center gap-1.5 text-xs font-black text-[#0B7C69]"><Award size={14} /> 12 CEUs EARNED</p>
-            <p className="font-display text-lg font-semibold text-[#2E2A3B]">Immersion Cohort ✓</p>
-          </motion.div>
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="absolute -right-2 bottom-24 rotate-3 rounded-2xl bg-[#2E2A3B] px-4 py-3 text-white shadow-xl sm:-right-5">
-            <p className="text-xs font-black text-[#FFC93C]">HAPPY · RELAXED · ENGAGED</p>
-            <p className="font-display text-lg font-semibold">Trust first, teaching second</p>
-          </motion.div>
-          <div className="absolute -bottom-5 left-8 -rotate-2 rounded-2xl bg-[#FF6B5B] px-5 py-3 text-white shadow-xl">
-            <p className="text-xs font-black text-white/80">NEXT LIVE WORKSHOP · FREE 1 CEU</p>
-            <p className="font-display font-semibold">Oct 28 · Your First HRE Session</p>
+        <div className="absolute -bottom-20 -left-10 h-20 w-20 rounded-full bg-[#0B4A8E]/20" />
+        <div className="relative" style={{ color: "#FFF9F1" }}>
+          <div className="flex items-center gap-3" style={{ marginBottom: "2rem" }}>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/20" style={{ background: "#E14E40" }}>
+              <span className="text-xs font-bold text-white">N</span>
+            </div>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/20" style={{ background: "#7C6FF0" }}>
+              <span className="text-xs font-bold text-white">H</span>
+            </div>
           </div>
-        </motion.div>
+          <h2 className="font-display text-3xl font-semibold text-white" style={{ marginBottom: "1.5rem" }}>TALK ABA WITH NENE AND HELEN</h2>
+          <p className="text-base font-medium text-white/80" style={{ marginBottom: "2rem" }}>A MONTHLY ABA LEARNING SERIES</p>
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-4 max-w-xl text-lg font-medium text-white/90">
+            We're excited to announce our first FREE CEU SESSION this November!
+            Join us monthly as we host ABA specialists from around the globe for
+            meaningful learning, professional development, and shared expertise.
+          </motion.p>
+          <div className="grid gap-2 md:grid-cols-4" style={{ marginBottom: "2rem", maxWidth: "clamp(200px, 90vw, 400px)" }}>
+            <div className="flex flex-col items-center gap-1.5" style={{ color: "#FFF9F1" }}>
+              <div className="relative h-8 w-8 rounded-full bg-[#0B4A8E] flex items-center justify-center" style={{ flexShrink: 0 }}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                </svg>
+              </div>
+              <span className="text-xs font-black">EXPERT SPEAKERS<br/>FROM AROUND THE GLOBE</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5" style={{ color: "#FFF9F1" }}>
+              <div className="relative h-8 w-8 rounded-full bg-[#D4A853] flex items-center justify-center" style={{ flexShrink: 0 }}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <circle cx="12" cy="12" r="10" /><path d="M8 16l4-5 8 5" />
+                </svg>
+              </div>
+              <span className="text-xs font-black">PRACTICAL INSIGHTS</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5" style={{ color: "#FFF9F1" }}>
+              <div className="relative h-8 w-8 rounded-full bg-[#0B4A8E] flex items-center justify-center" style={{ flexShrink: 0 }}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <span className="text-xs font-black">PROFESSIONAL<br/>DEVELOPMENT</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5" style={{ color: "#D4A853" }}>
+              <div className="relative h-8 w-8 rounded-full bg-[#D4A853] flex items-center justify-center" style={{ flexShrink: 0 }}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M17 3h5v4h-4v6h-2v-4H7v-4h-2v4H4v6h2v4H2v-4h6v4h2v-4z" />
+                </svg>
+              </div>
+              <span className="text-xs font-black">SHARED<br/>EXPERTISE</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3" style={{ background: "rgba(255,255,255,0.1)", borderRadius: "1rem", padding: "0.75rem 1.5rem" }}>
+            <span className="flex items-center gap-2" style={{ color: "#E14E40" }}>
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={3}>
+                <path d="M12 2v4l10 6-10 6v-4" /><circle cx="3" cy="11" r="4" /><path d="M21 11c0 7-9 13-9 13L3 11c0-7 9-13 9-13z" />
+              </svg>
+            </span>
+            <span>LISTEN IN — ABSOLUTELY FREE!</span>
+            <span className="flex items-center gap-2" style={{ color: "#7C6FF0" }}>
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={3}>
+                <rect x="2" y="6" width="20" height="14" rx="2" ry="2" /><path d="M6 2l3 6 5-5" />
+              </svg>
+            </span>
+            <span>CERTIFICATE OPTION:<br/>QABA or IBAO Certificate<br/>available for ₦2,500.</span>
+          </div>
+          <div className="flex items-center gap-3" style={{ marginTop: "2rem", color: "#7BF0D4" }}>
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={3}>
+              <path d="M12 2v4l10 6-10 6v-4" /><circle cx="3" cy="11" r="4" /><path d="M21 11c0 7-9 13-9 13L3 11c0-7 9-13 9-13z" />
+            </svg>
+            <span>THIS NOVEMBER, WE WILL BE KICKING OFF WITH Dr. Michael Mueller<br/>CEO OF IBAO, AS OUR FIRST PRESENTER.</span>
+          </div>
+          <p className="mt-8 text-center" style={{ color: "#FFF9F1" }}>
+            <span className="inline-block rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-[0.16em]" style={{ background: "#E14E40" }}>Stay tuned for more exciting learning</span>
+            <span className="inline-block rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-[0.16em]" style={{ background: "#E14E40" }}>with Nene and Helen!</span>
+          </p>
+        </div>
+        <div className="absolute -bottom-5 left-8 -rotate-2 rounded-2xl bg-[#0B4A8E] px-5 py-3 text-white shadow-xl" style={{ bottom: "-60px" }}>
+          <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="none" stroke="currentColor" strokeWidth={3}>
+            <path d="M12 2v4l10 6-10 6v-4" /><circle cx="3" cy="11" r="4" /><path d="M21 11c0 7-9 13-9 13L3 11c0-7 9-13 9-13z" />
+          </svg>
+          <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="none" stroke="currentColor" strokeWidth={3}>
+            <circle cx="12" cy="12" r="5" /><path d="M3 6h6l6 6 6-6h-6L3 6z M3 14h6l6 6 6-6h-6L3 14z" />
+          </svg>
+          <span className="text-xs font-black" style={{ color: "#E14E40" }}>International Behavior Analysis Organization<br/>Approved Content Provider</span>
+          <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="none" stroke="currentColor" strokeWidth={3}>
+            <circle cx="12" cy="12" r="5" /><path d="M3 6h6l6 6 6-6h-6L3 6z M3 14h6l6 6 6-6h-6L3 14z" /></svg>
+          <span className="text-xs font-black" style={{ color: "#0B7C69" }}>QABA APPROVED TRAINING PROGRAM</span>
+        </div>
       </div>
-      <div className="relative border-y-[3px] border-[#2E2A3B] bg-[#2E2A3B] py-3.5 text-white">
-        <div className="flex overflow-hidden"><div className="animate-marquee flex shrink-0 items-center gap-8 pr-8 text-sm font-black uppercase tracking-[0.14em]">
-          {Array.from({ length: 2 }).flatMap((_, k) => ["Today's ABA", "PFA & SBT", "Assent-Based", "Trauma-Informed", "BACB + ASHA CEUs", "Play-First", "Instant Certificates"].map((t, i) => (
-            <span key={`${k}-${i}`} className="flex items-center gap-8 whitespace-nowrap">{t} <Star size={13} className="fill-[#FFC93C] text-[#FFC93C]" /></span>
-          )))}
-        </div></div>
-      </div>
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="relative block h-10 w-full sm:h-14" style={{ color: "#FFF9F1" }}><path d="M0,32 C240,60 480,0 720,24 C960,48 1200,8 1440,32 L1440,60 L0,60 Z" fill="currentColor" /></svg>
     </div>
   );
 }
-
 export default function Home() {
   const featured = courses.filter((c) => c.featured);
   const [evEmail, setEvEmail] = useState("");
