@@ -42,7 +42,7 @@
     (root || document).querySelectorAll(".reveal:not(.is-in)").forEach(function (el) { io ? io.observe(el) : el.classList.add("is-in"); });
   }
 
-  var ui = { mobileOpen: false, menuOpen: false, authCreds: "BCBA" };
+  var ui = { mobileOpen: false, menuOpen: false, authCreds: "BCBA", authMode: "signup" };
 
   /* ---------- Pieces ---------- */
   function logo(light) {
@@ -145,15 +145,21 @@
   }
   var INPUT = "mt-1.5 w-full rounded-2xl border-2 border-[#2E2A3B]/12 bg-[#FFF9F1] px-4 py-3 text-sm font-bold text-[#2E2A3B] focus:border-[#7C6FF0] focus:outline-none";
   function authHtml() {
+    var login = ui.authMode === "login";
+    var title = login ? "Log in to continue" : "Create your free account";
+    var formName = login ? "auth-login" : "auth-signup";
     return '<div class="confetti-card bg-[#7C6FF0] px-6 py-6 text-white"><div class="flex items-start justify-between"><div>' +
-      '<p class="text-xs font-black uppercase tracking-[0.18em] text-white/70">Welcome to Talk ABA</p><h2 id="auth-title" class="font-display mt-1 text-2xl font-semibold">Sign in to earn CEUs</h2></div>' +
+      '<p class="text-xs font-black uppercase tracking-[0.18em] text-white/70">Welcome to Talk ABA</p><h2 id="auth-title" class="font-display mt-1 text-2xl font-semibold">' + title + '</h2></div>' +
       '<button data-act="close-auth" class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/20 hover:bg-white/30" aria-label="Close">' + icon("x", 17) + "</button></div></div>" +
-      '<form data-form="signin" class="space-y-4 px-6 py-6">' +
-        '<div><label for="au-name" class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Full name (for certificates)</label><input id="au-name" name="name" required autocomplete="name" placeholder="Jordan Taylor" class="' + INPUT + '"></div>' +
-        '<div><label for="au-email" class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Email</label><input id="au-email" name="email" required type="email" autocomplete="email" placeholder="you@clinic.com" class="' + INPUT + '"></div>' +
-        '<div><span class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Credential</span><div id="cred-chips" class="mt-1.5 flex flex-wrap gap-2">' + credChips() + "</div></div>" +
-        '<button class="w-full rounded-full bg-[#7C6FF0] px-6 py-3.5 text-sm font-black text-white shadow-[0_5px_0_#5B4ED6] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none">Create my free account</button>' +
-        '<p class="text-center text-xs font-semibold text-[#5B5570]">Free forever · No card required · Your CEU transcript lives here</p></form>';
+      '<div class="flex gap-2 border-b border-[#2E2A3B]/8 px-6 pt-5"><button type="button" data-act="auth-mode" data-mode="login" class="flex-1 rounded-t-xl px-3 py-2 text-sm font-black ' + (login ? "bg-[#2E2A3B] text-white" : "text-[#5B5570]") + '">Log in</button><button type="button" data-act="auth-mode" data-mode="signup" class="flex-1 rounded-t-xl px-3 py-2 text-sm font-black ' + (!login ? "bg-[#2E2A3B] text-white" : "text-[#5B5570]") + '">Sign up</button></div>' +
+      '<form data-form="' + formName + '" class="space-y-4 px-6 py-6">' +
+        (!login ? '<div><label for="au-name" class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Full name</label><input id="au-name" name="name" required autocomplete="name" placeholder="Jordan Taylor" class="' + INPUT + '"></div>' : "") +
+        '<div><label for="au-email" class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Email / username</label><input id="au-email" name="email" required type="email" autocomplete="email" placeholder="you@clinic.com" class="' + INPUT + '"></div>' +
+        '<div><label for="au-password" class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Password</label><input id="au-password" name="password" required type="password" minlength="8" autocomplete="' + (login ? "current-password" : "new-password") + '" placeholder="' + (login ? "Enter your password" : "Create a password") + '" class="' + INPUT + '"></div>' +
+        (!login ? '<div><span class="text-xs font-black uppercase tracking-widest text-[#5B5570]">Credential</span><div id="cred-chips" class="mt-1.5 flex flex-wrap gap-2">' + credChips() + "</div></div>" : "") +
+        '<p id="auth-status" class="hidden rounded-2xl bg-[#FFE3DC] p-3 text-sm font-bold text-[#E14E40]" role="alert"></p>' +
+        '<button class="w-full rounded-full bg-[#7C6FF0] px-6 py-3.5 text-sm font-black text-white shadow-[0_5px_0_#5B4ED6] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none">' + (login ? "Log in" : "Create my free account") + '</button>' +
+        '<p class="text-center text-xs font-semibold text-[#5B5570]">' + (login ? "Use the email and password you signed up with." : "Free forever Â· No card required Â· Your CEU transcript lives here.") + "</p></form>";
   }
 
   /* ---------- Mount ---------- */
@@ -217,6 +223,26 @@
     });
   }
 
+  function submitAuth(form, action) {
+    var email = form.elements.email.value.trim().toLowerCase();
+    var password = form.elements.password.value;
+    var status = document.getElementById("auth-status");
+    var button = form.querySelector("button[type=submit], button:not([type])");
+    if (status) { status.classList.add("hidden"); status.textContent = ""; }
+    if (!email || email.indexOf("@") < 0 || password.length < 8) return;
+    if (!window.api || !window.api.base()) { if (status) { status.textContent = "The account service is unavailable. Please try again when the site is connected to its PHP server."; status.classList.remove("hidden"); } return; }
+    if (button) { button.disabled = true; button.textContent = action === "login" ? "Checkingâ€¦" : "Creatingâ€¦"; }
+    var body = { action: action, email: email, password: password };
+    if (action === "signup") { body.name = form.elements.name.value.trim(); body.creds = ui.authCreds; }
+    window.api.post("auth.php", body).then(function (r) {
+      if (r.status >= 300 || !r.body.user) throw new Error((r.body && r.body.error) || "Authentication failed.");
+      S.signIn(r.body.user); S.closeAuth(); form.reset();
+    }).catch(function (err) {
+      if (status) { status.textContent = err.message; status.classList.remove("hidden"); }
+      if (button) { button.disabled = false; button.textContent = action === "login" ? "Log in" : "Create my free account"; }
+    });
+  }
+
   Actions.many({
     "open-cart": function () { ui.mobileOpen = false; S.openCart(); },
     "close-cart": function () { S.closeCart(); },
@@ -233,13 +259,10 @@
       if (!st.user) { S.closeCart(); S.openAuth(); return; }
       S.enroll(st.cart.slice()); S.clearCart(); S.closeCart(); location.href = "dashboard.html";
     },
+    "auth-mode": function (el) { ui.authMode = el.getAttribute("data-mode"); els.authModal.innerHTML = authHtml(); renderOverlays(); },
     "pick-cred": function (el) { ui.authCreds = el.getAttribute("data-cred"); document.getElementById("cred-chips").innerHTML = credChips(); },
-    "signin": function (form) {
-      var name = form.elements.name.value.trim(), email = form.elements.email.value.trim();
-      if (!name || email.indexOf("@") < 0) return;
-      S.signIn({ name: name, email: email, creds: ui.authCreds });
-      S.closeAuth(); form.reset();
-    },
+    "auth-signup": function (form) { submitAuth(form, "signup"); },
+    "auth-login": function (form) { submitAuth(form, "login"); },
     "newsletter": function (form) {
       var email = form.elements.email.value.trim(); if (!email) return;
       var box = document.getElementById("newsletter"), btn = form.querySelector("button"); btn.disabled = true;
