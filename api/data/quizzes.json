@@ -1,0 +1,225 @@
+{
+ "todays-aba-foundations": {
+  "title": "Today's ABA Foundations: From Compliance to Compassion",
+  "ceus": 3.5,
+  "ceuTypes": [
+   "BACB Learning",
+   "ASHA"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "Today's ABA starts with safety and rapport. Demands and assessment wait until the learner is happy, relaxed, and engaged — trust first, teaching second."
+   },
+   {
+    "answer": 1,
+    "explain": "Any sign of distress or protest is honored immediately. Relent, restore HRE, and repeat — this is how empowerment and trust are built."
+   },
+   {
+    "answer": 1,
+    "explain": "Assent is continuous, observable, and revocable — the learner votes with their feet, voice, and affect in every moment."
+   },
+   {
+    "answer": 1,
+    "explain": "By enriching contexts, following the learner's lead, never coercing through distress, and making decisions from performance — the process itself avoids re-traumatization."
+   },
+   {
+    "answer": 1,
+    "explain": "Freedom to leave is both dignifying and informative — it tells you exactly when your context needs revision."
+   }
+  ]
+ },
+ "pfa-interview-informed": {
+  "title": "Practical Functional Assessment: The Interview-Informed Process",
+  "ceus": 5,
+  "ceuTypes": [
+   "BACB Learning"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "The interview centers voices of those who know and love the learner — revealing loves, aversions, and evocative contexts no checklist can capture."
+   },
+   {
+    "answer": 1,
+    "explain": "Real life doesn't isolate variables — the IISCA tests the synthesized establishing operation (e.g., denied access + demands + removed attention) together."
+   },
+   {
+    "answer": 1,
+    "explain": "Televisibility is an ethical test: if you'd flinch at a family watching, redesign the procedure."
+   },
+   {
+    "answer": 1,
+    "explain": "Safety first: enriched return contexts, clear termination criteria, and trained implementers are non-negotiable."
+   },
+   {
+    "answer": 1,
+    "explain": "PFA answers 'why' — understanding first — so treatment (SBT) can teach replacement skills under the same motivating conditions."
+   }
+  ]
+ },
+ "sbt-skills-based-treatment": {
+  "title": "Skills-Based Treatment: Communication, Toleration & Cooperation",
+  "ceus": 5,
+  "ceuTypes": [
+   "BACB Learning"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "The FCR must work where it matters — under the real EO — and work every time at first, so the learner trusts their new voice."
+   },
+   {
+    "answer": 1,
+    "explain": "The learner's behavior is the compass. Progress, pause, or back up based on what you see now — not at next week's meeting."
+   },
+   {
+    "answer": 1,
+    "explain": "Resurgence is information, not defiance. Adjust the challenge to match current capacity and protect trust."
+   },
+   {
+    "answer": 1,
+    "explain": "CABs are the payoff: participating in circle time, waiting in line, doing homework — childhood, reclaimed."
+   },
+   {
+    "answer": 1,
+    "explain": "SBT aims at lives, not just data paths — skills the learner and family genuinely value, generalized everywhere."
+   }
+  ]
+ },
+ "assent-dignity-ethics": {
+  "title": "Assent, Dignity & Trauma-Informed Care",
+  "ceus": 2,
+  "ceuTypes": [
+   "BACB Ethics"
+  ],
+  "questions": [
+   {
+    "answer": 3,
+    "explain": "Assent-based practice weaves all four principles together — benefiting others, integrity, compassion/dignity/respect, and cultural responsiveness."
+   },
+   {
+    "answer": 1,
+    "explain": "All behavior communicates. Turning away and pushing materials are classic withdrawal signals — honor first, analyze second."
+   },
+   {
+    "answer": 1,
+    "explain": "Universal precautions for dignity: assume trauma histories, prioritize safety, rapport, and agency for everyone."
+   },
+   {
+    "answer": 1,
+    "explain": "Assent is continuous — document the ongoing conversation, not a one-time signature."
+   }
+  ]
+ },
+ "play-first-naturalistic": {
+  "title": "Play First: Naturalistic Teaching for Early Learners",
+  "ceus": 3,
+  "ceuTypes": [
+   "BACB Learning",
+   "ASHA"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "Pairing makes YOU the reinforcer — the child should light up when you arrive, before any demand is ever placed."
+   },
+   {
+    "answer": 1,
+    "explain": "Join first, then gently expand. Shared joy opens the door to new play and language."
+   },
+   {
+    "answer": 1,
+    "explain": "NET harnesses intrinsic motivation in real contexts — learning sticks because it's meaningful."
+   },
+   {
+    "answer": 1,
+    "explain": "Routines are the curriculum — snack, bath, and bedtime beat flashcards every time."
+   }
+  ]
+ },
+ "speech-aba-collaboration": {
+  "title": "Speech + ABA Collaboration: Building Total Communicators",
+  "ceus": 2.5,
+  "ceuTypes": [
+   "BACB Learning",
+   "ASHA"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "No modality hierarchy — the best communication is the communication that works for the learner right now."
+   },
+   {
+    "answer": 1,
+    "explain": "Shared, measurable goals with complementary strategies — communication IS behavior."
+   },
+   {
+    "answer": 1,
+    "explain": "Decades of research: AAC supports spoken language development while giving learners a voice today."
+   }
+  ]
+ },
+ "supervising-with-heart": {
+  "title": "Supervising with Heart: Compassionate Supervision & Mentorship",
+  "ceus": 2,
+  "ceuTypes": [
+   "BACB Supervision"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "Timely, specific, behavior-focused feedback with a clear path forward — kindness AND clarity."
+   },
+   {
+    "answer": 1,
+    "explain": "Show me, don't tell me — competence is demonstrated with real learners under observation."
+   },
+   {
+    "answer": 1,
+    "explain": "Supervisors protect the workforce. Listen first, then adjust systems — starting with your own expectations."
+   }
+  ]
+ },
+ "family-partnership-coaching": {
+  "title": "Partnering with Families: Caregiver Coaching That Sticks",
+  "ceus": 2,
+  "ceuTypes": [
+   "BACB Learning",
+   "ASHA"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "Families know their child best. Our job is to add tools to their expertise — not replace it."
+   },
+   {
+    "answer": 1,
+    "explain": "Explain briefly, model it, practice together with support, then celebrate — every coaching moment follows the rhythm."
+   },
+   {
+    "answer": 1,
+    "explain": "Non-implementation is feedback about OUR plan's fit. Redesign with the family, not against them."
+   }
+  ]
+ },
+ "immersion-cohort": {
+  "title": "Today's ABA Immersion Cohort (Live, 6 Weeks)",
+  "ceus": 12,
+  "ceuTypes": [
+   "BACB Learning",
+   "BACB Ethics",
+   "BACB Supervision"
+  ],
+  "questions": [
+   {
+    "answer": 1,
+    "explain": "Your capstone tells a story: how safety, listening, and skill-building changed a learner's trajectory."
+   },
+   {
+    "answer": 1,
+    "explain": "Today's ABA is profoundly relational. Live practice with coaching builds the judgment no recording can."
+   }
+  ]
+ }
+}
