@@ -145,13 +145,21 @@
       }
       return api._probe;
     },
+    parseResponse: function (r) {
+      return r.text().then(function (raw) {
+        var body = null;
+        try { body = raw ? JSON.parse(raw) : null; } catch (e) { body = null; }
+        if (!body) body = { error: raw ? "The server returned an invalid response (HTTP " + r.status + ")." : "The server returned an empty response (HTTP " + r.status + "). Check that the PHP server is running." };
+        return { status: r.status, body: body };
+      });
+    },
     post: function (path, body) {
       return fetch(api.base() + "/" + path, {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
-      }).then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); });
+      }).then(api.parseResponse);
     },
     get: function (path) {
-      return fetch(api.base() + "/" + path, { cache: "no-store" }).then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); });
+      return fetch(api.base() + "/" + path, { cache: "no-store" }).then(api.parseResponse);
     }
   };
 
